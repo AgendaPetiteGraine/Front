@@ -15,6 +15,22 @@ import "../../../../lib/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import YouTube from "react-youtube";
 
+export async function getStaticPaths() {
+  // Utilisez generateStaticParams() ici pour générer les chemins statiques
+  const paths = generateStaticParams();
+
+  return {
+    paths,
+    fallback: false, // ou true si vous utilisez le fallback
+  };
+}
+
+// Fonction pour générer les paramètres statiques
+export function generateStaticParams() {
+  // Remplacez cette logique par votre propre logique pour générer les chemins statiques
+  return [{ params: { eventId: "1" } }, { params: { eventId: "2" } }];
+}
+
 export default function Event({ params }: { params: { eventId: string } }) {
   const event_Id = params.eventId;
   // paramètres pour le lecteur vidéo Youtube
