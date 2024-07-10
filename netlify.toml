@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && npm run export"
+  command = "npm run build"
   publish = "out"
 
 
@@ -10,3 +10,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+  [build]
+  command = "npm run export"
+  publish = "out"
