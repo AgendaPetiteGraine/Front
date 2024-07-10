@@ -3,13 +3,9 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "16"  # ou la version de Node.js que vous utilisez
+  NODE_VERSION = "18.17.0"  # ou la version de Node.js que vous utilisez
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[headers]]
-  for = "/*"
-  values = { "Access-Control-Allow-Origin" = "*" }  # si vous avez des problèmes de CORS
