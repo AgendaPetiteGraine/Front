@@ -7,5 +7,5 @@ module.exports = {
       "site--petitegraine--xj5ljztnmr2k.code.run",
     ],
   },
-  // autres configurations
+  output: "export",
 };
