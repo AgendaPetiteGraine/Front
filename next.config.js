@@ -7,5 +7,6 @@ module.exports = {
       "site--petitegraine--xj5ljztnmr2k.code.run",
     ],
   },
+  images: { unoptimized: true },
   output: "export",
 };
