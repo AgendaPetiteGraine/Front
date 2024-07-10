@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap");
+.main {
+  background-image: url("/background.jpg");
+  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+.container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.loading {
+  position: fixed;
+  background-color: #333333e5;
+  border: #333 1px solid;
+  width: 50vw;
+  height: 50vh;
+  z-index: 2;
+  color: white;
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-size: 20px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 53% 47% 80% 20% / 60% 49% 51% 40%;
+}
+.section {
+  width: 80vw;
+  min-width: 675px;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: #333 1px solid;
+  padding: 20px;
+  background: linear-gradient(
+    145deg,
+    rgba(235, 235, 235, 1) 0%,
+    rgba(251, 251, 251, 1) 53%,
+    rgba(232, 232, 232, 1) 100%
+  );
+}
+
+.required {
+  background-color: #e66136;
+  color: white;
+  height: 30px;
+  border-radius: 83% 17% 90% 10% / 53% 41% 59% 47%;
+  padding: 3px;
+}
+.checked {
+  background-color: #2a4160;
+  border-radius: 83% 17% 90% 10% / 53% 41% 59% 47%;
+  padding: 3px;
+  height: 30px;
+  color: white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.largeInput {
+  width: 80%;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10vw;
+}
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 2;
+}
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.form label:not(.radio) {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.form fieldset {
+  padding: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.picturesContainer {
+  display: flex;
+  gap: 20px;
+}
+.picturesContainer > div {
+  flex: 1;
+}
+.picturesLibContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn {
+  background-color: #e66136;
+  color: white;
+  height: 35px;
+  width: 300px;
+  border: #333 1px solid;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+.btn:hover {
+  text-transform: uppercase;
+  background-color: #2a4160;
+}
+.trash {
+  color: #2a4160;
+  transition: 0.3s;
+  border: none;
+}
+.trash:hover {
+  color: #e66136;
+}
+.noborder {
+  border: none;
+  padding-top: 5px;
+  display: flex;
+  width: 100%;
+  justify-content: right;
+  background: none;
+}

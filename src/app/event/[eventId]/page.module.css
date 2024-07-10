@@ -1,0 +1,239 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-image: url("/background.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.leftColumn {
+  width: 258px;
+  margin-left: 70px;
+  border-left: 1px solid #333333;
+  border-right: 1px solid #333333;
+  scrollbar-width: none;
+}
+
+.rightColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 70px;
+  border-right: 1px solid #333333;
+  background: linear-gradient(
+    145deg,
+    rgba(235, 235, 235, 1) 0%,
+    rgba(251, 251, 251, 1) 53%,
+    rgba(232, 232, 232, 1) 100%
+  );
+}
+
+.section {
+  padding: 20px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.part1 {
+  display: flex;
+  gap: 20px;
+}
+.part1 > div:last-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.containerPhotos {
+  display: flex;
+}
+
+.containerPhotos > div:not(.photos) {
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photos {
+  flex: 1;
+  border: #333333 1px solid;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.picture {
+  object-fit: contain;
+}
+.miniatures {
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #333333;
+  border: #333333 1px solid;
+}
+
+.mainTitle {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.bold {
+  font-weight: 500;
+}
+.description {
+  border: #333333 1px solid;
+  padding: 15px;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  border-radius: 10px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.part2 {
+  display: flex;
+  flex-direction: column;
+}
+.part2 > div:first-child {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.buttonLG {
+  border-radius: 82% 18% 89% 11% / 56% 51% 49% 44%;
+  background-color: #eda26a;
+  font-size: 17px;
+  padding: 4px;
+  transition: 0.2s;
+}
+.buttonLG:hover {
+  background-color: #294260;
+  color: white;
+}
+.bookingSpecifications {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.part3 {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+.part3 > div:last-child {
+  flex: 1;
+  border: #333333 1px solid;
+}
+.part3 > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+}
+.imageContainer {
+  flex: 1;
+  width: 100%; /* The container takes the full width of its parent */
+  margin: auto; /* Center the container */
+  height: 400px;
+  overflow: hidden;
+}
+.responsiveImage {
+  object-fit: cover; /* or contain, depending on your needs */
+  width: 100%;
+  height: auto;
+}
+.direction {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex: 1;
+}
+.part4 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.event {
+  border: 1px solid #333333;
+  width: 300px;
+  position: relative;
+  transition: 0.5s;
+}
+.event:hover {
+  scale: 103%;
+}
+.eventInfos {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin-top: 45px;
+}
+.dateBox {
+  position: absolute;
+  top: 200px;
+  right: 0px;
+}
+.date {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  color: white;
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-size: 20px;
+  font-style: normal;
+}
+.time {
+  position: absolute;
+  right: 10px;
+  color: #e66136;
+}
+.title {
+  padding-bottom: 10px;
+}
+.orange {
+  color: #e66136;
+}
+.eventImage {
+  border-bottom: #333333 1px solid;
+  object-fit: cover;
+}
+.complet {
+  position: absolute;
+  top: 0px;
+  width: 298px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-weight: 600;
+  z-index: 3;
+  background-color: #ffffff37;
+}
+.free {
+  position: absolute;
+  top: 0px;
+  width: 90px;
+  background-color: #e66136;
+  text-align: center;
+  border-bottom-right-radius: 15px;
+  font-size: 15px;
+}

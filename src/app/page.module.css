@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap");
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-image: url("/background.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.h3 {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.leftColumn {
+  width: 258px;
+  margin-left: 70px;
+  border-left: 1px solid #333333;
+  border-right: 1px solid #333333;
+  scrollbar-width: none;
+}
+
+.rightColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 70px;
+  border-right: 1px solid #333333;
+  background: linear-gradient(
+    145deg,
+    rgba(235, 235, 235, 1) 0%,
+    rgba(251, 251, 251, 1) 53%,
+    rgba(232, 232, 232, 1) 100%
+  );
+}
+
+.section {
+  padding: 20px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.eventsTab {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.favTab {
+  display: flex;
+  gap: 15px;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+.event {
+  border: 1px solid #333333;
+  width: 300px;
+  position: relative;
+  transition: 0.5s;
+}
+.event:hover {
+  scale: 103%;
+}
+.eventInfos {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin-top: 45px;
+}
+.dateBox {
+  position: absolute;
+  top: 200px;
+  right: 0px;
+}
+.date {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  color: white;
+  font-family: "Love Ya Like A Sister", cursive;
+  font-weight: 400;
+  font-size: 20px;
+  font-style: normal;
+}
+.time {
+  position: absolute;
+  right: 10px;
+  color: #e66136;
+}
+.title {
+  padding-bottom: 10px;
+}
+.orange {
+  color: #e66136;
+}
+.eventImage {
+  border-bottom: #333333 1px solid;
+  object-fit: cover;
+}
+.separateur {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  height: 90px;
+  justify-content: space-evenly;
+}
+.listInfos {
+  font-size: 14px;
+  padding-left: 15px;
+}
+.description {
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.complet {
+  position: absolute;
+  top: 0px;
+  width: 298px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-weight: 600;
+  z-index: 3;
+  background-color: #ffffff37;
+}
+.free {
+  position: absolute;
+  top: 0px;
+  width: 90px;
+  background-color: #e66136;
+  text-align: center;
+  border-bottom-right-radius: 15px;
+  font-size: 15px;
+}
+.heart {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  z-index: 5;
+  color: #2a4160;
+  width: 30px;
+  height: 30px;
+}
+
+.heartEmpty {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  z-index: 5;
+  color: #2a416078;
+  width: 30px;
+  height: 30px;
+  transition: 0.5s;
+}
+
+.heartEmpty :hover {
+  color: #2a4160;
+}
+/* Tablet and Smaller Desktop */
+/* @media (min-width: 701px) and (max-width: 1120px) {
+  .grid {
+    grid-template-columns: repeat(2, 50%);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .vercelLogo {
+    filter: invert(1);
+  }
+
+  .logo {
+    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+} */

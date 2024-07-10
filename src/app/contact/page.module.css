@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap");
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-image: url("/background.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.leftColumn {
+  width: 258px;
+  margin-left: 70px;
+  border-left: 1px solid #333333;
+  border-right: 1px solid #333333;
+  scrollbar-width: none;
+}
+
+.rightColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 70px;
+  border-right: 1px solid #333333;
+  background: linear-gradient(
+    145deg,
+    rgba(235, 235, 235, 1) 0%,
+    rgba(251, 251, 251, 1) 53%,
+    rgba(232, 232, 232, 1) 100%
+  );
+}
+.intro {
+  padding: 15px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.form > label {
+  display: flex;
+  gap: 20px;
+  height: 25px;
+}
+
+.form > label > input {
+  flex: 1;
+}
+.form > label > textarea {
+  flex: 1;
+  height: 200px;
+}
+
+.required {
+  background-color: #e66136;
+  color: white;
+  height: 30px;
+  border-radius: 83% 17% 90% 10% / 53% 41% 59% 47%;
+  padding: 3px;
+}
+.checked {
+  background-color: #2a4160;
+  border-radius: 83% 17% 90% 10% / 53% 41% 59% 47%;
+  padding: 3px;
+  height: 30px;
+  color: white;
+}
+.btn {
+  margin-top: 150px;
+  background-color: #e66136;
+  color: white;
+  height: 35px;
+  width: 300px;
+  border: #333 1px solid;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+.btn:hover {
+  text-transform: uppercase;
+  background-color: #2a4160;
+}
+.right {
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
