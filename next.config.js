@@ -6,7 +6,7 @@ module.exports = {
       "maps.googleapis.com",
       "site--petitegraine--xj5ljztnmr2k.code.run",
     ],
+    unoptimized: true,
   },
-  images: { unoptimized: true },
   output: "export",
 };
