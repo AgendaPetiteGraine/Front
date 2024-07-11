@@ -9,7 +9,18 @@ export const getTokenFromCookie = () => {
   return Cookies.get("token");
 };
 export const removeTokenFromCookie = (token) => {
-  Cookies.remove("token"); // Le token expire dans 30 jours
+  Cookies.remove("token");
+};
+
+export const saveEventIdToCookie = (eventId) => {
+  Cookies.set("eventId", eventId, { expires: 1 });
+};
+export const getEventIdFromCookie = () => {
+  // Récupérez le token depuis le cookie
+  return Cookies.get("eventId");
+};
+export const removeEventIdFromCookie = () => {
+  Cookies.remove("eventId");
 };
 
 export const setInterestsToCookie = (interests, eventId) => {

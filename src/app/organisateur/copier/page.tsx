@@ -4,19 +4,18 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getTokenFromCookie } from "../../../utils/auth";
-import MyDropzone from "../../../components/MyDropzone";
+import {
+  getEventIdFromCookie,
+  getTokenFromCookie,
+  removeEventIdFromCookie,
+} from "../../utils/auth";
+import MyDropzone from "../../components/MyDropzone";
 import { useRouter } from "next/navigation";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import "../../../../../lib/fontawesome";
+import "../../../../lib/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function EventToUpdate({
-  params,
-}: {
-  params: { eventId: string };
-}) {
-  const event_Id = params.eventId;
+export default function EventToCopy() {
   const [isLoading, setIsLoading] = useState(true);
   interface Address {
     description: string;
@@ -56,8 +55,9 @@ export default function EventToUpdate({
   const [place_id, setPlace_id] = useState("");
 
   useEffect(() => {
-    if (event_Id) {
-      setEventId(event_Id);
+    const event_id = getEventIdFromCookie();
+    if (event_id) {
+      setEventId(event_id);
     }
     const tokenFromCookie = getTokenFromCookie();
     setToken(tokenFromCookie);
@@ -129,6 +129,7 @@ export default function EventToUpdate({
           `https://site--petitegraine--xj5ljztnmr2k.code.run/event/${eventId}`
         );
         console.log("data", data);
+        console.log("place_id", data.event.place_id);
         setTitle(data.event.title);
         setType(data.event.type);
         const keyWordsTab: string[] = [];
@@ -160,6 +161,7 @@ export default function EventToUpdate({
         setAgeMax(data.event.ageMax);
         setTicketing(data.event.ticketing);
         setStatus(data.event.status);
+        setPlace_id(data.event.place_id);
         if (data.event.bookingRequired) {
           setBookingRequired("true");
         } else {
@@ -185,7 +187,7 @@ export default function EventToUpdate({
     }
   };
 
-  const updateEvent = async () => {
+  const copyEvent = async () => {
     if (
       title &&
       type &&
@@ -231,7 +233,7 @@ export default function EventToUpdate({
         formData.append("bookingRequired", bookingRequired);
         formData.append("bookingSpecifications", bookingSpecifications);
         const { data } = await axios.post(
-          `https://site--petitegraine--xj5ljztnmr2k.code.run/event/update/${eventId}`,
+          `https://site--petitegraine--xj5ljztnmr2k.code.run/event/create`,
           formData,
           {
             headers: {
@@ -241,7 +243,8 @@ export default function EventToUpdate({
           }
         );
         setIsLoading(false);
-        alert("L'événement a bien été modifié !");
+        alert("L'événement a bien été créé!");
+        removeEventIdFromCookie();
         router.push("/organisateur");
       } catch (error) {
         setIsLoading(false);
@@ -274,7 +277,7 @@ export default function EventToUpdate({
       {eventId && (
         <div className={styles.main}>
           <section className={styles.section}>
-            Modifier un événement
+            Copier un événement
             <div>
               <div className={styles.form}>
                 <label>
@@ -782,11 +785,11 @@ export default function EventToUpdate({
                 <div className={styles.center}>
                   <button
                     onClick={() => {
-                      updateEvent();
+                      copyEvent();
                     }}
                     className={styles.btn}
                   >
-                    Modifier l'événement
+                    Copier l'événement
                   </button>
                 </div>
               </div>

@@ -11,6 +11,7 @@ import {
   displayDateDay,
   getTokenFromCookie,
   removeTokenFromCookie,
+  saveEventIdToCookie,
 } from "../utils/auth";
 import Header from "../components/Header";
 
@@ -236,9 +237,8 @@ export default function Home() {
                               className={styles.btn}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(
-                                  `/organisateur/modifier/${event._id}/`
-                                );
+                                saveEventIdToCookie(event._id);
+                                router.push(`/organisateur/modifier`);
                               }}
                             >
                               Modifier
@@ -247,9 +247,8 @@ export default function Home() {
                               className={styles.btn}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(
-                                  `/organisateur/copier/${event._id}/`
-                                );
+                                saveEventIdToCookie(event._id);
+                                router.push(`/organisateur/copier`);
                               }}
                             >
                               Copier
@@ -347,9 +346,8 @@ export default function Home() {
                               className={styles.btn}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(
-                                  `/organisateur/modifier/${event._id}/`
-                                );
+                                saveEventIdToCookie(event._id);
+                                router.push(`/organisateur/modifier`);
                               }}
                             >
                               Modifier
@@ -358,9 +356,8 @@ export default function Home() {
                               className={styles.btn}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(
-                                  `/organisateur/copier/${event._id}/`
-                                );
+                                saveEventIdToCookie(event._id);
+                                router.push(`/organisateur/copier`);
                               }}
                             >
                               Copier
@@ -458,9 +455,8 @@ export default function Home() {
                               className={styles.btn}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(
-                                  `/organisateur/modifier/${event._id}/`
-                                );
+                                saveEventIdToCookie(event._id);
+                                router.push(`/organisateur/modifier`);
                               }}
                             >
                               Modifier
@@ -469,9 +465,8 @@ export default function Home() {
                               className={styles.btn}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(
-                                  `/organisateur/copier/${event._id}/`
-                                );
+                                saveEventIdToCookie(event._id);
+                                router.push(`/organisateur/copier`);
                               }}
                             >
                               Copier
