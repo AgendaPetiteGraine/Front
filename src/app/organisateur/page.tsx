@@ -75,6 +75,14 @@ export default function Home() {
               event.status === "À venir" || event.status === "Complet"
           );
           setComingEvents(newComingEvents);
+          const newPastEvents = data.events.filter(
+            (event: Event) => event.status === "Passé"
+          );
+          setPastEvents(newPastEvents);
+          const newDeletedEvents = data.events.filter(
+            (event: Event) => event.status === "Annulé"
+          );
+          setDeletedEvents(newDeletedEvents);
         } catch (error: unknown) {
           console.error("Erreur lors de la récupération des données:", error);
           if (axios.isAxiosError(error)) {
