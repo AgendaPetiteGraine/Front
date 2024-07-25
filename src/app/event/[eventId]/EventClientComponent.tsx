@@ -238,22 +238,30 @@ export default function EventClientComponent({
               </div>
             </div>
           )}
-          {event && event.video && (
+          {event && (
             <div className={styles.part3}>
-              <YouTube videoId={videoId} opts={opts} />
-              <div className={styles.address}>
-                <span className={styles.bold}>Adresse : </span>
-                {event.address.address1}
-                <br />
-                {event.address.address2 && (
-                  <span>
-                    {event.address.address2}
-                    <br />
-                  </span>
+              <div>
+                {event.video && (
+                  <div className={styles.video}>
+                    {" "}
+                    {event.video && <YouTube videoId={videoId} opts={opts} />}
+                  </div>
                 )}
-                {event.address.zip} {event.address.city}
-                <br />
-                {event.address.country}
+                <div className={styles.direction}>
+                  <h4>Comment s'y rendre ?</h4>
+                  <div>{event.address}</div>
+                  {event.access && <div>🚍 {event.access}</div>}
+                </div>
+              </div>
+              <div className={styles.imageContainer}>
+                <Image
+                  alt="carte"
+                  src={`https://maps.googleapis.com/maps/api/staticmap?center=${event.lat},${event.lng}&zoom=16&size=500x400&key=${apiKey}&markers=color:orange%7C${event.lat},${event.lng}`}
+                  width={500}
+                  height={400}
+                  className={styles.responsiveImage}
+                  layout="responsive"
+                />
               </div>
             </div>
           )}
