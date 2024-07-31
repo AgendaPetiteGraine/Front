@@ -130,7 +130,7 @@ export default function Home() {
                 signup();
               }}
             >
-              Créer un compte
+              Envoyer le message
             </button>
           </div>
         </div>
