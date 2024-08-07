@@ -13,6 +13,8 @@ import {
   getInterestsFromCookie,
   updateInterestsInCookie,
 } from "../app/utils/auth";
+import { init } from "@amplitude/analytics-browser";
+import { logEvent } from "@amplitude/analytics-browser";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
@@ -75,9 +77,22 @@ export default function Home() {
   const [keyWords, setKeyWords] = useState<KeyWord[]>([]);
   const [filter, setFilter] = useState<Filter>(defaultFilter);
   const [isLoading, setIsLoading] = useState(true);
+  const [apiKey, setApiKey] = useState();
 
   // Récupérer les données au premier chargement de la page
   useEffect(() => {
+    const fetchApiKey = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://site--petitegraine--xj5ljztnmr2k.code.run/g3tAmp!APIk3y`,
+          {}
+        );
+        console.log("API key", data);
+        setApiKey(data);
+      } catch (error) {
+        console.error("Error fetching Api key:", error);
+      }
+    };
     const fetchData = async () => {
       try {
         let request = `https://site--petitegraine--xj5ljztnmr2k.code.run/events?`;
@@ -109,6 +124,7 @@ export default function Home() {
       }
     };
     fetchData();
+    fetchApiKey();
     setIsLoading(false);
   }, []);
 
@@ -166,6 +182,17 @@ export default function Home() {
     fetchData();
   }, [filter]);
 
+  useEffect(() => {
+    if (apiKey) {
+      console.log("Initializing Amplitude with API key:", apiKey);
+      init(apiKey);
+    }
+  }, [apiKey]);
+
+  const handleClick = (eventName: string) => {
+    logEvent(eventName, { buttonName: eventName });
+  };
+
   // ajouter ou enlever des favoris (actualiser les stats)
   const favorites = async (eventId: string, change: string) => {
     try {
@@ -214,6 +241,7 @@ export default function Home() {
                           key={event._id}
                           className={styles.event}
                           onClick={() => {
+                            handleClick(event.title);
                             isClient && router.push(`/event/${event._id}`);
                           }}
                         >
@@ -328,6 +356,7 @@ export default function Home() {
                     key={event._id}
                     className={styles.event}
                     onClick={() => {
+                      handleClick(event.title);
                       isClient && router.push(`/event/${event._id}`);
                     }}
                   >

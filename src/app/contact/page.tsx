@@ -11,7 +11,7 @@ import LeftColumn from "../components/LeftColumn";
 import styles from "./page.module.css";
 import { saveTokenToCookie } from "@/app/utils/auth";
 
-export default function Home() {
+export default function Contact() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [object, setObject] = useState("");
