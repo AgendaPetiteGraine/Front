@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
-import { displayDateDay } from "./utils/auth";
+import { displayDateDay, displayDateMonth } from "./utils/auth";
 import { useRouter } from "next/navigation";
 import {
   setInterestsToCookie,
@@ -71,6 +71,7 @@ export default function Home() {
     name: string;
   }
   const [events, setEvents] = useState<Event[] | null>(null);
+  const [eventsToDisplay, setEventsToDisplay] = useState<Event[] | null>(null);
   const [eventsList, setEventslist] = useState<string[]>([]);
   const [types, setTypes] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
@@ -78,6 +79,42 @@ export default function Home() {
   const [filter, setFilter] = useState<Filter>(defaultFilter);
   const [isLoading, setIsLoading] = useState(true);
   const [apiKey, setApiKey] = useState();
+  const [week, setWeek] = useState(0);
+  const [weekStart, setWeekStart] = useState<Date>(new Date());
+  const [weekEnd, setWeekEnd] = useState<Date>(new Date());
+
+  const getStartOfWeek = (date: Date, weekOffset: number = 0) => {
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+    const startOfWeek = new Date(date.setDate(diff));
+    startOfWeek.setDate(startOfWeek.getDate() + weekOffset * 7); // Décalage en fonction de la semaine
+    setWeekStart(startOfWeek);
+    return startOfWeek;
+  };
+
+  const getEndOfWeek = (startOfWeek: Date) => {
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(endOfWeek.getDate() + 6); // Ajouter 6 jours pour obtenir le samedi
+    setWeekEnd(endOfWeek);
+    return endOfWeek;
+  };
+
+  const handleResize = () => {
+    if (window.innerWidth < 650) {
+      console.log("Responsive");
+      if (events) {
+        const startOfWeek = getStartOfWeek(new Date(), week);
+        const endOfWeek = getEndOfWeek(startOfWeek);
+        const filteredEvents = events.filter((event) => {
+          const eventDate = new Date(event.date);
+          return eventDate >= startOfWeek && eventDate <= endOfWeek;
+        });
+        setEventsToDisplay(filteredEvents);
+      }
+    } else {
+      setEventsToDisplay(events); // Afficher tous les événements lorsque la fenêtre est plus large que 650px
+    }
+  };
 
   // Récupérer les données au premier chargement de la page
   useEffect(() => {
@@ -98,6 +135,7 @@ export default function Home() {
         let request = `https://site--petitegraine--xj5ljztnmr2k.code.run/events?`;
         const { data } = await axios.get(request);
         setEvents(data.eventsComing);
+        setEventsToDisplay(data.eventsComing);
         const newEventsList = [""];
         data.eventsComing.map((event: Event) => {
           newEventsList.push(event._id);
@@ -174,6 +212,7 @@ export default function Home() {
         }
         const { data } = await axios.get(request);
         setEvents(data.eventsComing);
+        setEventsToDisplay(data.eventsComing);
         console.log(request);
       } catch (error) {
         console.error("Erreur lors de la récupération des données:", error);
@@ -188,6 +227,17 @@ export default function Home() {
       init(apiKey);
     }
   }, [apiKey]);
+
+  useEffect(() => {
+    // Appeler handleResize au premier rendu pour vérifier la largeur initiale
+    handleResize();
+    // Ajouter un écouteur d'événement pour détecter les changements de dimension
+    window.addEventListener("resize", handleResize);
+    // Nettoyer l'écouteur d'événement lorsqu'il n'est plus nécessaire
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [events, week]);
 
   const handleClick = (eventName: string) => {
     logEvent(eventName, { buttonName: eventName });
@@ -227,131 +277,176 @@ export default function Home() {
       <div className={styles.rightColumn}>
         <Header />
         <section className={styles.section}>
+          <div className={styles.mobile}>
+            <div className={styles.flexColumnCenter}>
+              <Image
+                src="/logo.png" // Le chemin vers l'image dans le dossier public
+                alt="Logo" // Texte alternatif pour l'accessibilité
+                width={258} // Largeur de l'image
+                height={195} // Hauteur de l'image
+              />
+              <h3>L'Agenda Culturel des Tout-Petits</h3>
+              <br />
+            </div>
+          </div>
           {isLoading ? (
             <div>En cours de chargement</div>
           ) : events && events.length > 0 ? (
             <div>
-              <h3 className={styles.h3}>Vos événements favoris</h3>
-              {interests.length > 0 ? (
-                <div className={styles.favTab}>
-                  {events?.map((event) => {
-                    return (
-                      interests.includes(event._id) && (
-                        <div
-                          key={event._id}
-                          className={styles.event}
-                          onClick={() => {
-                            handleClick(event.title);
-                            isClient && router.push(`/event/${event._id}`);
-                          }}
-                        >
-                          {event.pictures.length > 0 ? (
-                            <Image
-                              src={event.pictures[0]}
-                              alt={event.title}
-                              width={298}
-                              height={200}
-                              className={styles.eventImage}
-                              style={{
-                                filter:
-                                  event.status === "Complet"
-                                    ? "grayscale(1)"
-                                    : "grayscale(0)",
-                                objectPosition: `center center`,
-                              }}
-                            />
-                          ) : (
-                            <Image
-                              src="/image.png"
-                              alt={event.title}
-                              width={298}
-                              height={200}
-                              className={styles.eventImage}
-                              style={{
-                                filter:
-                                  event.status === "Complet"
-                                    ? "grayscale(1)"
-                                    : "grayscale(0)",
-                              }}
-                            />
-                          )}
-                          {event.status === "Complet" && (
-                            <div className={styles.complet}>Complet</div>
-                          )}
-                          {interests.includes(event._id) ? (
-                            <div
-                              className={styles.heart}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                console.log("eventId", event._id);
-                                const newInterests = setInterestsToCookie(
-                                  interests,
-                                  event._id
-                                );
-                                favorites(event._id, "remove");
-                                console.log("newInterests", newInterests);
-                                setInterests(newInterests);
-                              }}
-                            >
-                              <FontAwesomeIcon icon="heart" size="2xl" />
+              <div className={styles.inversedColors}>
+                <h3 className={styles.h3}>Vos événements favoris</h3>
+                {interests.length > 0 ? (
+                  <div className={styles.favTab}>
+                    {events?.map((event) => {
+                      return (
+                        interests.includes(event._id) && (
+                          <div
+                            key={event._id}
+                            className={styles.eventFav}
+                            onClick={() => {
+                              handleClick(event.title);
+                              isClient && router.push(`/event/${event._id}`);
+                            }}
+                          >
+                            {event.pictures.length > 0 ? (
+                              <Image
+                                src={event.pictures[0]}
+                                alt={event.title}
+                                width={298}
+                                height={200}
+                                className={styles.eventImageFav}
+                                style={{
+                                  filter:
+                                    event.status === "Complet"
+                                      ? "grayscale(1)"
+                                      : "grayscale(0)",
+                                  objectPosition: `center center`,
+                                }}
+                              />
+                            ) : (
+                              <Image
+                                src="/image.png"
+                                alt={event.title}
+                                width={298}
+                                height={200}
+                                className={styles.eventImageFav}
+                                style={{
+                                  filter:
+                                    event.status === "Complet"
+                                      ? "grayscale(1)"
+                                      : "grayscale(0)",
+                                }}
+                              />
+                            )}
+                            {event.status === "Complet" && (
+                              <div className={styles.complet}>Complet</div>
+                            )}
+                            {interests.includes(event._id) ? (
+                              <div
+                                className={styles.heart}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  console.log("eventId", event._id);
+                                  const newInterests = setInterestsToCookie(
+                                    interests,
+                                    event._id
+                                  );
+                                  favorites(event._id, "remove");
+                                  console.log("newInterests", newInterests);
+                                  setInterests(newInterests);
+                                }}
+                              >
+                                <FontAwesomeIcon icon="heart" size="2xl" />
+                              </div>
+                            ) : (
+                              //
+                              <div
+                                className={styles.heartEmpty}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  console.log("eventId", event._id);
+                                  const newInterests = setInterestsToCookie(
+                                    interests,
+                                    event._id
+                                  );
+                                  favorites(event._id, "add");
+                                  console.log("newInterests", newInterests);
+                                  setInterests(newInterests);
+                                }}
+                              >
+                                <FontAwesomeIcon icon="heart" size="2xl" />
+                              </div>
+                            )}
+                            {event.free && (
+                              <div className={styles.free}>GRATUIT</div>
+                            )}
+                            <div className={styles.dateBox}>
+                              <div
+                                style={{ width: "200px", overflow: "hidden" }}
+                              >
+                                <Image
+                                  src="/feuille.png"
+                                  alt="date"
+                                  width={250}
+                                  height={25}
+                                />
+                              </div>
+                              <h4 className={styles.date}>
+                                {displayDateDay(new Date(event.date))}
+                              </h4>
+                              <h4 className={styles.time}>
+                                {event.timeEnd
+                                  ? `De ${event.timeStart} à ${event.timeEnd}`
+                                  : `À partir de ${event.timeStart}`}
+                              </h4>
                             </div>
-                          ) : (
-                            //
-                            <div
-                              className={styles.heartEmpty}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                console.log("eventId", event._id);
-                                const newInterests = setInterestsToCookie(
-                                  interests,
-                                  event._id
-                                );
-                                favorites(event._id, "add");
-                                console.log("newInterests", newInterests);
-                                setInterests(newInterests);
-                              }}
-                            >
-                              <FontAwesomeIcon icon="heart" size="2xl" />
+                            <div className={styles.eventInfos}>
+                              <h3 className={styles.title}>
+                                {event.title.toUpperCase()}
+                              </h3>
                             </div>
-                          )}
-                          {event.free && (
-                            <div className={styles.free}>GRATUIT</div>
-                          )}
-                          <div className={styles.dateBox}>
-                            <Image
-                              src="/feuille.png"
-                              alt="date"
-                              width={250}
-                              height={25}
-                            />
-                            <h4 className={styles.date}>
-                              {displayDateDay(new Date(event.date))}
-                            </h4>
-                            <h4 className={styles.time}>
-                              {event.timeEnd
-                                ? `De ${event.timeStart} à ${event.timeEnd}`
-                                : `À partir de ${event.timeStart}`}
-                            </h4>
                           </div>
-                          <div className={styles.eventInfos}>
-                            <h3 className={styles.title}>
-                              {event.title.toUpperCase()}
-                            </h3>
-                          </div>
-                        </div>
-                      )
-                    );
-                  })}
-                </div>
-              ) : (
-                <div>
-                  Vous n'avez aucun événement favori à venir. Gérez vos favoris
-                  en cliquant sur le ❤︎ correspondant à chaque événement.
-                </div>
-              )}
+                        )
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div>
+                    Vous n'avez aucun événement favori à venir. Gérez vos
+                    favoris en cliquant sur le ❤︎ correspondant à chaque
+                    événement.
+                  </div>
+                )}
+              </div>
               <h3 className={styles.h3}>Prochains événements</h3>
+              <div className={styles.mobile}>
+                <div className={styles.flex}>
+                  <button
+                    onClick={() => {
+                      week > 0 && setWeek(week - 1);
+                    }}
+                  >
+                    <FontAwesomeIcon icon="chevron-left" size="2xl" />
+                  </button>
+                  {week === 0 ? (
+                    <h3>Cette semaine</h3>
+                  ) : (
+                    <h3 className={styles.center}>
+                      Semaine du {displayDateMonth(weekStart)}
+                      <br /> au {displayDateMonth(weekEnd)}
+                    </h3>
+                  )}
+                  <button
+                    onClick={() => {
+                      setWeek(week + 1);
+                    }}
+                  >
+                    <FontAwesomeIcon icon="chevron-right" size="2xl" />
+                  </button>
+                </div>
+              </div>
               <div className={styles.eventsTab}>
-                {events?.map((event) => (
+                {eventsToDisplay?.map((event) => (
                   <div
                     key={event._id}
                     className={styles.event}
@@ -360,36 +455,47 @@ export default function Home() {
                       isClient && router.push(`/event/${event._id}`);
                     }}
                   >
-                    {event.pictures.length > 0 ? (
-                      <Image
-                        src={event.pictures[0]}
-                        alt={event.title}
-                        width={298}
-                        height={200}
-                        className={styles.eventImage}
-                        style={{
-                          filter:
-                            event.status === "Complet"
-                              ? "grayscale(1)"
-                              : "grayscale(0)",
-                          objectPosition: `center center`,
-                        }}
-                      />
-                    ) : (
-                      <Image
-                        src="/image.png"
-                        alt={event.title}
-                        width={298}
-                        height={200}
-                        className={styles.eventImage}
-                        style={{
-                          filter:
-                            event.status === "Complet"
-                              ? "grayscale(1)"
-                              : "grayscale(0)",
-                        }}
-                      />
-                    )}
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "200px",
+                        position: "relative",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {event.pictures.length > 0 ? (
+                        <Image
+                          src={event.pictures[0]}
+                          alt={event.title}
+                          // width={298}
+                          // height={200}
+                          layout="fill"
+                          className={styles.eventImage}
+                          style={{
+                            filter:
+                              event.status === "Complet"
+                                ? "grayscale(1)"
+                                : "grayscale(0)",
+                            objectPosition: `center center`,
+                          }}
+                        />
+                      ) : (
+                        <Image
+                          src="/image.png"
+                          alt={event.title}
+                          // width={298}
+                          // height={200}
+                          className={styles.eventImage}
+                          layout="fill"
+                          style={{
+                            filter:
+                              event.status === "Complet"
+                                ? "grayscale(1)"
+                                : "grayscale(0)",
+                          }}
+                        />
+                      )}
+                    </div>
                     {event.status === "Complet" && (
                       <div className={styles.complet}>Complet</div>
                     )}
@@ -431,12 +537,14 @@ export default function Home() {
                     )}
                     {event.free && <div className={styles.free}>GRATUIT</div>}
                     <div className={styles.dateBox}>
-                      <Image
-                        src="/feuille.png"
-                        alt="date"
-                        width={250}
-                        height={25}
-                      />
+                      <div style={{ width: "200px", overflow: "hidden" }}>
+                        <Image
+                          src="/feuille.png"
+                          alt="date"
+                          width={250}
+                          height={25}
+                        />
+                      </div>
                       <h4 className={styles.date}>
                         {displayDateDay(new Date(event.date))}
                       </h4>
@@ -506,6 +614,20 @@ export default function Home() {
                     </div>
                   </div>
                 ))}
+              </div>
+
+              <div className={styles.mobile}>
+                <div className={styles.flexCenter}>
+                  <button
+                    className={styles.btnWeek}
+                    onClick={() => {
+                      setWeek(week + 1);
+                    }}
+                  >
+                    Semaine Prochaine
+                    <FontAwesomeIcon icon="chevron-right" size="2xl" />
+                  </button>
+                </div>
               </div>
             </div>
           ) : (

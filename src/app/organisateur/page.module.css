@@ -132,3 +132,15 @@
   background-color: #e66136;
   text-transform: uppercase;
 }
+
+@media (max-width: 650px) {
+  .leftColumn {
+    display: none;
+  }
+  .rightColumn {
+    margin-left: 30px;
+    margin-right: 30px;
+    border-left: 1px solid #333333;
+    width: 100%;
+  }
+}

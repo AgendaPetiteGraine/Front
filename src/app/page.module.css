@@ -12,6 +12,7 @@
 .h3 {
   padding-bottom: 20px;
   padding-top: 20px;
+  padding-left: 20px;
 }
 .leftColumn {
   width: 258px;
@@ -22,7 +23,6 @@
 }
 
 .rightColumn {
-  flex: 1;
   display: flex;
   flex-direction: column;
   margin-right: 70px;
@@ -33,29 +33,48 @@
     rgba(251, 251, 251, 1) 53%,
     rgba(232, 232, 232, 1) 100%
   );
+  width: calc(100% - 398px);
 }
 
 .section {
-  padding: 20px;
   overflow-y: scroll;
+  overflow-x: hidden;
   scrollbar-width: none;
 }
 
 .eventsTab {
+  padding: 20px;
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.inversedColors {
+  width: 90vw;
+  padding: 20px;
+}
 .favTab {
+  width: calc(100vw - 368px);
   display: flex;
   gap: 15px;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
 }
+.eventFav {
+  width: 300px;
+  border: 1px solid #333333;
+  position: relative;
+  transition: 0.5s;
+  scroll-snap-align: start;
+}
+.eventFav:hover {
+  transform: scale(1.03);
+}
+
 .event {
   border: 1px solid #333333;
-  width: 300px;
+  width: 100%;
+  max-width: 400px;
   position: relative;
   transition: 0.5s;
 }
@@ -80,7 +99,7 @@
   color: white;
   font-family: "Love Ya Like A Sister", cursive;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 17px;
   font-style: normal;
 }
 .time {
@@ -97,6 +116,15 @@
 .eventImage {
   border-bottom: #333333 1px solid;
   object-fit: cover;
+  object-position: center center;
+  width: 100%;
+  height: 200px;
+}
+.eventImageFav {
+  border-bottom: #333333 1px solid;
+  object-fit: cover;
+  object-position: center center;
+  height: 200px;
 }
 .separateur {
   display: flex;
@@ -165,6 +193,85 @@
 .heartEmpty :hover {
   color: #2a4160;
 }
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.center {
+  text-align: center;
+}
+.btnWeek {
+  width: 280px;
+  height: 40px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  font-size: 17px;
+  transition: 0.5s;
+}
+.btnWeek:hover {
+  color: white;
+  background-color: #2a4160;
+}
+
+@media (max-width: 800px) {
+  .leftColumn {
+    margin-left: 30px;
+  }
+  .rightColumn {
+    margin-right: 30px;
+    width: calc(100% - 328px);
+  }
+}
+@media (min-width: 651px) {
+  .mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .leftColumn {
+    display: none;
+  }
+  .inversedColors {
+    background-color: #2a4160;
+    color: white;
+    padding: 10px;
+  }
+  .rightColumn {
+    margin-left: 30px;
+    border-left: 1px solid #333333;
+    width: 100%;
+  }
+  .favTab {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .rightColumn {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
 /* Tablet and Smaller Desktop */
 /* @media (min-width: 701px) and (max-width: 1120px) {
   .grid {

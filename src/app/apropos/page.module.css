@@ -33,3 +33,15 @@
   padding: 15px;
   overflow-y: scroll;
 }
+
+@media (max-width: 650px) {
+  .leftColumn {
+    display: none;
+  }
+  .rightColumn {
+    margin-left: 30px;
+    margin-right: 30px;
+    border-left: 1px solid #333333;
+    width: 100%;
+  }
+}

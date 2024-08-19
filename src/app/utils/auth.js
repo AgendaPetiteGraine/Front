@@ -69,6 +69,26 @@ export const displayDate = (date) => {
   return `${day} ${months[monthIndex]} ${year}`;
 };
 
+export const displayDateMonth = (date) => {
+  const months = [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre",
+  ];
+  const day = date.getUTCDate();
+  const monthIndex = date.getUTCMonth();
+  return `${day} ${months[monthIndex]}`;
+};
+
 export const displayDateDay = (date) => {
   const months = [
     "janvier",
