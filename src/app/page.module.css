@@ -50,7 +50,7 @@
   justify-content: space-evenly;
 }
 .inversedColors {
-  width: 90vw;
+  width: 100%;
   padding: 20px;
 }
 .favTab {
@@ -224,11 +224,47 @@
   gap: 20px;
   align-items: center;
   font-size: 17px;
-  transition: 0.5s;
-}
-.btnWeek:hover {
-  color: white;
   background-color: #2a4160;
+  color: white;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  background-color: #2a4160;
+  color: white;
+  padding: 20px;
+}
+
+.filters > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.filtersLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.filterTypes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.filterPlace {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.plus {
+  background-color: white;
+  height: 37px;
+  font-size: 17px;
+  border-radius: 25px;
 }
 
 @media (max-width: 800px) {
@@ -252,11 +288,13 @@
   }
   .inversedColors {
     background-color: #2a4160;
+    width: 100%;
+    border-top: #333333 2px solid;
     color: white;
     padding: 10px;
   }
   .rightColumn {
-    margin-left: 30px;
+    margin-left: 20px;
     border-left: 1px solid #333333;
     width: 100%;
   }

@@ -82,6 +82,9 @@ export default function Home() {
   const [week, setWeek] = useState(0);
   const [weekStart, setWeekStart] = useState<Date>(new Date());
   const [weekEnd, setWeekEnd] = useState<Date>(new Date());
+  const [displayMoreFilters, setDisplayMoreFilters] = useState(false);
+  const [isFree, setIsFree] = useState(false);
+  const [areBabyAccepted, setAreBabyAccepted] = useState(false);
 
   const getStartOfWeek = (date: Date, weekOffset: number = 0) => {
     const day = date.getDay();
@@ -113,6 +116,39 @@ export default function Home() {
       }
     } else {
       setEventsToDisplay(events); // Afficher tous les événements lorsque la fenêtre est plus large que 650px
+    }
+  };
+
+  const changeFilter = (type: any, element: any) => {
+    if (filter) {
+      const newFilter = { ...filter };
+      if (type === "city") {
+        const index = newFilter.city.indexOf(element);
+        if (index > -1) {
+          newFilter.city.splice(index, 1);
+        } else {
+          newFilter.city.push(element);
+        }
+      }
+      if (type === "type") {
+        const index = newFilter.type.indexOf(element);
+        if (index > -1) {
+          newFilter.type.splice(index, 1);
+        } else {
+          newFilter.type.push(element);
+        }
+      }
+      if (type === "keyWords") {
+        newFilter.keyWords = element;
+      }
+      if (type === "free") {
+        newFilter.free = !isFree;
+        setIsFree(!isFree);
+      }
+      if (type === "areBabyAccepted") {
+        newFilter.areBabyAccepted = true;
+      }
+      setFilter(newFilter);
     }
   };
 
@@ -419,6 +455,97 @@ export default function Home() {
                 )}
               </div>
               <h3 className={styles.h3}>Prochains événements</h3>
+              <div className={styles.mobile}>
+                <div className={styles.filters}>
+                  <div>
+                    <div className={styles.filtersLeft}>
+                      <div>
+                        <label>
+                          Gratuits uniquement{" "}
+                          <input
+                            type="checkbox"
+                            checked={isFree}
+                            onChange={() => {
+                              setIsFree(!isFree);
+                              changeFilter("free", isFree);
+                            }}
+                          />
+                        </label>
+                      </div>
+                      <div>
+                        <label>
+                          Bébés acceptés{" "}
+                          <input
+                            type="checkbox"
+                            checked={areBabyAccepted}
+                            onChange={() => {
+                              setAreBabyAccepted(!areBabyAccepted);
+                              changeFilter("areBabyAccepted", areBabyAccepted);
+                            }}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                    <div className={styles.filterTypes}>
+                      {types.map((type, index) => (
+                        <label key={index}>
+                          {type}
+                          <input
+                            type="checkbox"
+                            value={type}
+                            checked={
+                              (filter && filter.type.includes(type)) ?? false
+                            }
+                            onChange={() => {
+                              changeFilter("type", type);
+                            }}
+                          />
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  {!displayMoreFilters && (
+                    <button
+                      className={styles.plus}
+                      onClick={() => {
+                        setDisplayMoreFilters(!displayMoreFilters);
+                      }}
+                    >
+                      + Plus de Filtres
+                    </button>
+                  )}
+                  {displayMoreFilters && (
+                    <div className={styles.filterPlace}>
+                      Filtrer par ville : <br />
+                      {cities.map((city, index) => (
+                        <label key={index}>
+                          {city}
+                          <input
+                            type="checkbox"
+                            value={city}
+                            checked={
+                              (filter && filter.city.includes(city)) ?? false
+                            }
+                            onChange={(event) => {
+                              changeFilter("city", city);
+                            }}
+                          />
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                  {displayMoreFilters && (
+                    <button
+                      className={styles.plus}
+                      onClick={() => {
+                        setDisplayMoreFilters(!displayMoreFilters);
+                      }}
+                    >
+                      - Moins de Filtres
+                    </button>
+                  )}
+                </div>
+              </div>
               <div className={styles.mobile}>
                 <div className={styles.flex}>
                   <button

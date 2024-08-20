@@ -151,3 +151,20 @@
   justify-content: right;
   background: none;
 }
+
+@media (max-width: 650px) {
+  .section {
+    min-width: 0px;
+    width: 100%;
+  }
+  .form fieldset {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .columns {
+    flex-direction: column;
+  }
+  .picturesContainer {
+    flex-direction: column;
+  }
+}

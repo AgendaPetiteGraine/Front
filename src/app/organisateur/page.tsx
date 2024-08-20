@@ -166,6 +166,25 @@ export default function Home() {
           <section className={styles.section}>
             <h1>Bienvenue sur votre espace organisateur</h1>
             <br />
+            <div className={styles.mobile}>
+              <button
+                className={styles.btnCreate}
+                onClick={() => {
+                  router.push("/organisateur/nouveau");
+                }}
+              >
+                Créer un nouvel événement
+              </button>
+              <br />
+              <button
+                className={styles.btnContact}
+                onClick={() => {
+                  router.push(`/contact/`);
+                }}
+              >
+                Contacter l'Administrateur
+              </button>
+            </div>
             {data ? (
               <>
                 <div className={styles.eventsList}>
@@ -495,6 +514,17 @@ export default function Home() {
                       );
                     })}
                   </div>
+                  <div className={styles.mobile}>
+                    <button
+                      className={styles.btnCreate}
+                      onClick={() => {
+                        removeTokenFromCookie();
+                        setToken(null);
+                      }}
+                    >
+                      Se déconnecter
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (
@@ -504,7 +534,7 @@ export default function Home() {
         ) : (
           <section className={styles.section}>
             <h2>Connectez-vous pour accéder à votre espace</h2>
-            <div>
+            <div className={styles.connexionForm}>
               <label>
                 Email :
                 <input

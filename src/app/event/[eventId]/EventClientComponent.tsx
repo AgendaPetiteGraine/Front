@@ -112,6 +112,7 @@ export default function EventClientComponent({
                       width={600}
                       height={400}
                       className={styles.picture}
+                      layout="responsive"
                     />
                   )}
                 </div>
@@ -242,7 +243,7 @@ export default function EventClientComponent({
             <div className={styles.part3}>
               <div>
                 {event.video && (
-                  <div className={styles.video}>
+                  <div className={styles.videoContainer}>
                     {" "}
                     {event.video && <YouTube videoId={videoId} opts={opts} />}
                   </div>
