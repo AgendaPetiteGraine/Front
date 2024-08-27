@@ -310,6 +310,19 @@
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  .rightColumn {
+    background: linear-gradient(
+      145deg,
+      rgba(50, 50, 50, 1) 0%,
+      /* Gris foncé pour le début du dégradé */ rgba(40, 40, 40, 1) 53%,
+      /* Gris légèrement plus foncé au milieu */ rgba(30, 30, 30, 1) 100%
+        /* Gris encore plus foncé à la fin */
+    );
+    color: white; /* Assurez-vous que le texte est visible en blanc */
+  }
+}
+
 /* Tablet and Smaller Desktop */
 /* @media (min-width: 701px) and (max-width: 1120px) {
   .grid {

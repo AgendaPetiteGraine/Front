@@ -39,6 +39,7 @@
 .part1 {
   display: flex;
   gap: 20px;
+  max-width: 100%;
 }
 .part1 > div:last-child {
   display: flex;
@@ -49,7 +50,6 @@
 .containerPhotos {
   display: flex;
   max-width: 900px;
-  min-width: 400px;
 }
 
 .containerPhotos > div:not(.photos) {
@@ -142,6 +142,7 @@
   flex-direction: column;
   align-items: center;
   width: 450px;
+  max-width: 100%;
 }
 .imageContainer {
   flex: 1;
@@ -275,5 +276,17 @@
     margin-right: 30px;
     border-left: 1px solid #333333;
     width: 90%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .rightColumn {
+    background: linear-gradient(
+      145deg,
+      rgba(50, 50, 50, 1) 0%,
+      rgba(40, 40, 40, 1) 53%,
+      rgba(30, 30, 30, 1) 100%
+    );
+    color: white;
   }
 }
