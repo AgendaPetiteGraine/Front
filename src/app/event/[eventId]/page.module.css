@@ -38,6 +38,7 @@
 
 .part1 {
   display: flex;
+  flex-direction: row;
   gap: 20px;
   max-width: 100%;
 }
@@ -50,6 +51,7 @@
 .containerPhotos {
   display: flex;
   max-width: 900px;
+  min-width: 500px;
 }
 
 .containerPhotos > div:not(.photos) {
@@ -258,7 +260,7 @@
   border: #000 1px solid;
 }
 
-@media (max-width: 12000px) {
+@media (max-width: 1200px) {
   .part1,
   .part3 {
     flex-direction: column;
