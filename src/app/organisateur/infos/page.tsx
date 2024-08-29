@@ -83,7 +83,7 @@ export default function Home() {
         {
           headers: {
             authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
