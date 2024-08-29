@@ -59,10 +59,6 @@ export default function Home() {
         alert("L'adresse email renseignée n'est pas correcte.");
         return;
       }
-      if (website && website.slice(0, 3) !== "www") {
-        alert("Le site internet doit commencer par www.");
-        return;
-      }
       if (password.length < 8) {
         alert("Le mot de passe doit faire au moins 8 caractères");
         return;
@@ -227,7 +223,7 @@ export default function Home() {
                 updateData();
               }}
             >
-              Créer un compte
+              Modifier les informations
             </button>
           </div>
         </div>
