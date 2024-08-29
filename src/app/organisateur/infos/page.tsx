@@ -27,7 +27,7 @@ export default function Home() {
     setToken(tokenFromCookie);
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
+        const { data } = await axios.post(
           `https://site--petitegraine--xj5ljztnmr2k.code.run/host/account`,
           {
             headers: {
