@@ -55,7 +55,6 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [reload, setReload] = useState(false);
-  const imageRef1 = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
