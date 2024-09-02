@@ -129,7 +129,8 @@ export default function NewEvent() {
       bookingSpecifications &&
       description &&
       areBabyAccepted &&
-      bookingRequired
+      bookingRequired &&
+      place_id
     ) {
       let formattedWebsite = website;
       if (website && website.slice(0, 8) === "https://") {
@@ -450,6 +451,7 @@ export default function NewEvent() {
                       setAddress(suggestion.description);
                       setGoogleAddress([]);
                       setPlace_id(suggestion.place_id);
+                      console.log("suggestion", suggestion.place_id);
                     }}
                   >
                     {suggestion.description}
