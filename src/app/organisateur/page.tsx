@@ -114,6 +114,9 @@ export default function Home() {
       );
       setToken(data.token);
       saveTokenToCookie(data.token);
+      // const temporaryToken = "";
+      // saveTokenToCookie(temporaryToken);
+      // saveTokenToCookie(temporaryToken);
     } catch (error) {
       console.error("Erreur lors de la récupération des données:", error);
       alert("Les identifiants sont incorrects.");
