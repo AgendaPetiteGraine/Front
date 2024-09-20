@@ -234,7 +234,7 @@ export default function EventToCopy() {
         formData.append("bookingSpecifications", bookingSpecifications);
         const { data } = await axios.post(
           `https://site--petitegraine--xj5ljztnmr2k.code.run/event/create`,
-          // `http://localhost:3002/event/create`, to test
+          // `http://localhost:3002/event/create`,
           formData,
           {
             headers: {
