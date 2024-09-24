@@ -114,7 +114,7 @@ export default function Home() {
       );
       setToken(data.token);
       saveTokenToCookie(data.token);
-      // const temporaryToken = "";
+      // const temporaryToken = ""
       // saveTokenToCookie(temporaryToken);
       // saveTokenToCookie(temporaryToken);
     } catch (error) {
