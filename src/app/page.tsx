@@ -1,4 +1,5 @@
 "use client";
+// début
 import Image from "next/image";
 import Header from "./components/Header";
 import LeftColumn from "./components/LeftColumn";
