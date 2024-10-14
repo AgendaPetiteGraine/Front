@@ -320,7 +320,7 @@ export default function Home() {
                 src="/logo.png" // Le chemin vers l'image dans le dossier public
                 alt="Logo" // Texte alternatif pour l'accessibilité
                 width={258} // Largeur de l'image
-                height={195} // Hauteur de l'image
+                height={195} // Hauteur de l'imag
               />
               <h3>L'Agenda Culturel des Tout-Petits</h3>
               <br />
