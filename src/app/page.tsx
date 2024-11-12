@@ -116,7 +116,7 @@ export default function Home() {
         setEventsToDisplay(filteredEvents);
       }
     } else {
-      setEventsToDisplay(events); // Afficher tous les événements lorsque la fenêtre est plus large que 650px
+      setEventsToDisplay(events); // Afficher tous les événements lorsque la fenêtre est plus large que 650px...
     }
   };
 
