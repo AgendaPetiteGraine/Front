@@ -19,7 +19,7 @@ import { logEvent } from "@amplitude/analytics-browser";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
-import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
+import "@fortawesome/fontawesome-svg-core/styles.css"; //÷ Import the CSS
 import "../../lib/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Home() {
