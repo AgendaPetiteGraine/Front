@@ -222,7 +222,7 @@ export default function Home() {
     }
   }, [eventsList]);
 
-  // // Actualiser les données quand les filtres sont modifiés
+  // /// Actualiser les données quand les filtres sont modifiés
   useEffect(() => {
     const fetchData = async () => {
       try {
