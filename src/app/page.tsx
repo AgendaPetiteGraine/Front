@@ -26,7 +26,7 @@ export default function Home() {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
   const [interests, setInterests] = useState<string[]>([]);
-  // comment
+  // comments
   interface Suggestion {
     name: string;
   }
