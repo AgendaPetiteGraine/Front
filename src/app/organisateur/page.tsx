@@ -14,7 +14,7 @@ import {
   saveEventIdToCookie,
 } from "../utils/auth";
 import Header from "../components/Header";
-//
+// comments
 export default function Home() {
   interface Data {
     email: string;
