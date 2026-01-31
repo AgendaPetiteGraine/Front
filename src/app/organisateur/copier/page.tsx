@@ -632,7 +632,7 @@ export default function EventToCopy() {
                       <label>
                         <input
                           type="checkbox"
-                          checked={recurrence === "true" ?? true}
+                          checked={recurrence === "true"}
                           onChange={(event) => {
                             if (recurrence === "true") {
                               setRecurrence("false");
