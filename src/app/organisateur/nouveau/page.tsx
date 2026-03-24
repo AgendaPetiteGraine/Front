@@ -18,7 +18,7 @@ export default function NewEvent() {
   interface Address {
     description: string;
     place_id: string;
-    // Autres propriétés éventuelles
+    // Autres propriétés éventuelle
   }
   const [token, setToken] = useState(null);
   const [title, setTitle] = useState("");
@@ -566,7 +566,7 @@ export default function NewEvent() {
                   <label>
                     <input
                       type="checkbox"
-                      checked={recurrence === "true" ?? true}
+                      checked={recurrence === "true"}
                       onChange={(event) => {
                         if (recurrence === "true") {
                           setRecurrence("false");
