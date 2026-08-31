@@ -14,7 +14,7 @@ import {
   saveEventIdToCookie,
 } from "../utils/auth";
 import Header from "../components/Header";
-// comments
+// comment
 export default function Home() {
   interface Data {
     email: string;
@@ -66,20 +66,20 @@ export default function Home() {
               headers: {
                 authorization: `Bearer ${token}`,
               },
-            }
+            },
           );
           setData(data);
           const newComingEvents = data.events.filter(
             (event: Event) =>
-              event.status === "À venir" || event.status === "Complet"
+              event.status === "À venir" || event.status === "Complet",
           );
           setComingEvents(newComingEvents);
           const newPastEvents = data.events.filter(
-            (event: Event) => event.status === "Passé"
+            (event: Event) => event.status === "Passé",
           );
           setPastEvents(newPastEvents);
           const newDeletedEvents = data.events.filter(
-            (event: Event) => event.status === "Annulé"
+            (event: Event) => event.status === "Annulé",
           );
           setDeletedEvents(newDeletedEvents);
         } catch (error: unknown) {
@@ -110,7 +110,7 @@ export default function Home() {
         {
           email: email,
           password: password,
-        }
+        },
       );
       setToken(data.token);
       saveTokenToCookie(data.token);
@@ -134,7 +134,7 @@ export default function Home() {
           headers: {
             authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       alert("L'événement est bien marqué complet.");
       const tokenToUpdate = token;
